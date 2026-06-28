@@ -8,9 +8,10 @@ WORKDIR /app
 
 COPY pyproject.toml ./
 RUN mkdir -p app && touch app/__init__.py \
-    && pip install --upgrade pip && pip install .
+    && pip install --upgrade pip && pip install ".[dev]"
 
 COPY app ./app
+COPY tests ./tests
 COPY scripts ./scripts
 
 RUN pip install --no-deps -e .
