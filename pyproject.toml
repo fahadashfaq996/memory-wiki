@@ -1,0 +1,40 @@
+[project]
+name = "memory-wiki"
+version = "0.1.0"
+description = "Ingest conversation transcripts, generate memories with an LLM, store them as a navigable file tree in object storage, and expose Unix-style ls/cat/grep REST endpoints."
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    "pydantic>=2.6",
+    "pydantic-settings>=2.2",
+    "sqlalchemy>=2.0",
+    "psycopg2-binary>=2.9",
+    "boto3>=1.34",
+    "redis>=5.0",
+    "pyyaml>=6.0",
+    "openai>=1.30",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "httpx>=0.27",
+    "moto[s3]>=5.0",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "unit: fast, fully offline unit tests",
+    "integration: tests that require external services (Postgres/Redis/MinIO)",
+    "e2e: end-to-end tests through the API",
+]
+addopts = "-ra"
