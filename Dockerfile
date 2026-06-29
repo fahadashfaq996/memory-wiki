@@ -12,7 +12,6 @@ RUN mkdir -p app && touch app/__init__.py \
 
 COPY app ./app
 COPY tests ./tests
-COPY scripts ./scripts
 
 RUN pip install --no-deps -e .
 
